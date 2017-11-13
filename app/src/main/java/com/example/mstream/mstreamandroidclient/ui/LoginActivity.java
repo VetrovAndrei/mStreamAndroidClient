@@ -1,5 +1,6 @@
-package com.example.mstream.mstreamandroidclient;
+package com.example.mstream.mstreamandroidclient.ui;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
@@ -9,18 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mstream.mstreamandroidclient.api.async_tasks.GetWebToken;
+import com.example.mstream.mstreamandroidclient.R;
+import com.example.mstream.mstreamandroidclient.api.interfaces.GetWebTokenInterface;
+import com.example.mstream.mstreamandroidclient.helpers.TokenSaver;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-interface AsyncResponse {
-    void getJWTResponse(JSONObject response);
-}
-
-public class MainActivity extends AppCompatActivity implements  AsyncResponse {
+public class LoginActivity extends AppCompatActivity implements GetWebTokenInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         final Button loginButton = (Button) findViewById(R.id.loginButton);
         final EditText usernameText = (EditText) findViewById(R.id.usernameText);
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse {
             @Override
             public void onClick(View v) {
                 GetWebToken getJWTTask = new GetWebToken();
-                getJWTTask.delegate = MainActivity.this;
+                getJWTTask.delegate = LoginActivity.this;
                 JSONObject data = new JSONObject();
                 JSONObject obj = new JSONObject();
                 try {
@@ -50,13 +52,21 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse {
     @Override
     public void getJWTResponse(JSONObject response) {
         try {
-            Globals.jwt = response.getString("token");
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage(Globals.jwt)
-                    .setTitle("JWT");
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } catch (Exception e) {
+            if(response != null) {
+                TokenSaver.setToken(this, response.getString("token"));
+                Intent menu = new Intent(this, MenuActivity.class);
+                menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                menu.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(menu);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage("Incorrect login or password!")
+                        .setTitle("Log in error");
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        } catch (Exception ignored) {
         }
     }
 }

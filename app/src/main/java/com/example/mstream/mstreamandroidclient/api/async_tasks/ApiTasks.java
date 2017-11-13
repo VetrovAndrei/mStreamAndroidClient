@@ -1,6 +1,6 @@
-package com.example.mstream.mstreamandroidclient;
+package com.example.mstream.mstreamandroidclient.api.async_tasks;
 
-import android.os.AsyncTask;
+import com.example.mstream.mstreamandroidclient.Globals;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,20 +40,5 @@ class ApiRequest {
         } catch (Exception ignored) {
         }
         return result;
-    }
-}
-
-class GetWebToken extends AsyncTask<JSONObject, Integer, JSONObject> {
-    AsyncResponse delegate;
-    private ApiRequest apiRequest = new ApiRequest();
-
-    @Override
-    protected JSONObject doInBackground(JSONObject... params) {
-        return apiRequest.doPostRequest(params);
-    }
-
-    @Override
-    protected void onPostExecute(JSONObject response) {
-        delegate.getJWTResponse(response);
     }
 }
