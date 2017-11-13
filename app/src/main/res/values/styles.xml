@@ -8,4 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="editText_style">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/edittext_background</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+    </style>
+
+    <style name="button_style">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">40sp</item>
+    </style>
+
+    <style name="logo_style">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:layout_marginBottom">50sp</item>
+        <item name="android:layout_marginTop">70sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
