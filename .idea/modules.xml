@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Projects\mStreamAndroidClient\app\app.iml" filepath="D:\Projects\mStreamAndroidClient\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mStreamAndroidClient.iml" filepath="$PROJECT_DIR$/mStreamAndroidClient.iml" />
-      <module fileurl="file://D:\Projects\mStreamAndroidClient\mStreamAndroidClient.iml" filepath="D:\Projects\mStreamAndroidClient\mStreamAndroidClient.iml" />
     </modules>
   </component>
 </project>

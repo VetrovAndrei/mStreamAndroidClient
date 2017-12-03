@@ -41,4 +41,31 @@ class ApiRequest {
         }
         return result;
     }
+
+    JSONObject doGetRequest(JSONObject... params) {
+        JSONObject result = null;
+        try {
+            String address = Globals.address + params[0].getString("addr");
+            URL object = new URL(address);
+            HttpURLConnection con = (HttpURLConnection) object.openConnection();
+            con.setRequestMethod("GET");
+            StringBuilder sb = new StringBuilder();
+            int HttpResult = con.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(con.getInputStream(), "utf-8"));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                br.close();
+                String text = sb.toString();
+                result = new JSONObject(text);
+            } else {
+                System.out.println(con.getResponseMessage());
+            }
+        } catch (Exception ignored) {
+        }
+        return result;
+    }
 }
