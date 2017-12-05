@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.mstream.mstreamandroidclient.api.async_tasks.GetWebToken;
 import com.example.mstream.mstreamandroidclient.R;
+import com.example.mstream.mstreamandroidclient.api.async_tasks.GetWebToken;
 import com.example.mstream.mstreamandroidclient.api.interfaces.GetWebTokenInterface;
 import com.example.mstream.mstreamandroidclient.helpers.TokenSaver;
 
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements GetWebTokenInter
         try {
             if(response != null) {
                 TokenSaver.setToken(this, response.getString("token"));
-                Intent menu = new Intent(this, MenuActivity.class);
+                Intent menu = new Intent(this, MenuNav.class);
                 menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 menu.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
