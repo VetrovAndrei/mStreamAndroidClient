@@ -1,12 +1,15 @@
 package com.example.mstream.mstreamandroidclient.api.async_tasks;
 
 import com.example.mstream.mstreamandroidclient.Globals;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 class ApiRequest {
     JSONObject doPostRequest(JSONObject... params) {
@@ -41,10 +44,12 @@ class ApiRequest {
         }
         return result;
     }
-
-    JSONObject doGetRequest(JSONObject... params) {
+    //TODO наподумать - а для какой цели тут вообще неопределенное количество параметров?
+    JSONArray doGetRequest(JSONObject... params) {
         JSONObject result = null;
+        JSONArray JSON_arr = null;
         try {
+
             String address = Globals.address + params[0].getString("addr");
             URL object = new URL(address);
             HttpURLConnection con = (HttpURLConnection) object.openConnection();
@@ -60,12 +65,17 @@ class ApiRequest {
                 }
                 br.close();
                 String text = sb.toString();
-                result = new JSONObject(text);
+                JSON_arr = new JSONArray(text);
+                //result = new JSONObject(text);
             } else {
                 System.out.println(con.getResponseMessage());
             }
         } catch (Exception ignored) {
+
+
+            System.out.println("Error!!! :" + ignored.getMessage());
         }
-        return result;
+       // return result;
+        return JSON_arr;
     }
 }
